@@ -1,0 +1,741 @@
+/* --- VARIAVEIS GLOBAIS (APPLE PRO) --- */
+:root {
+    --bg-body: #FFFFFF;
+    --bg-surface: #F5F5F7;
+    /* Cinza Apple */
+    --text-main: #1D1D1F;
+    --text-secondary: #86868B;
+
+    --color-black: #000000;
+    --color-dark-grey: #333333;
+    --color-accent: #0071E3;
+    /* Azul Apple sutil para links/ícones */
+
+    --radius-pill: 999px;
+    --radius-card: 20px;
+    --radius-box: 24px;
+
+    --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 12px 24px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.12);
+
+    --container-width: 1280px;
+    /* Largura maior para caber 4 cards */
+    --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+html {
+    scroll-behavior: smooth; /* <--- AQUI */
+}
+/* --- RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-stack);
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* --- CONTAINER CENTRAL --- */
+.container {
+    width: 92%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+section {
+    padding: 6rem 0;
+}
+
+/* --- HEADER --- */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1.2rem 0;
+    transition: all 0.3s ease;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
+}
+
+header.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-sm);
+    padding: 1rem 0;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #fff;
+    letter-spacing: -0.5px;
+}
+
+header.scrolled .logo {
+    color: #000;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+nav a {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: #fff;
+}
+
+header.scrolled nav a {
+    color: var(--text-main);
+}
+
+header.scrolled nav a:hover {
+    color: #000;
+}
+
+.btn-nav {
+    background: #fff;
+    color: #000 !important;
+    padding: 10px 24px;
+    border-radius: var(--radius-pill);
+    font-weight: 600 !important;
+    font-size: 0.9rem;
+    transition: transform 0.2s;
+}
+
+header.scrolled .btn-nav {
+    background: #000;
+    color: #fff !important;
+}
+
+.btn-nav:hover {
+    transform: scale(1.03);
+}
+
+
+/* --- HERO SLIDER --- */
+.hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out, transform 8s linear;
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+.hero-slide.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 2;
+}
+
+/* Busca Centralizada */
+.search-wrapper {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.search-card {
+    background: #FFFFFF;
+    padding: 3.5rem;
+    border-radius: var(--radius-box);
+    width: 90%;
+    max-width: 960px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+}
+
+.search-card h1 {
+    font-size: 3.2rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    color: #000;
+}
+
+.search-card p {
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+}
+
+.search-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 16px;
+    align-items: end;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 5px;
+}
+
+.custom-select {
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #E5E5E5;
+    background: #F5F5F7;
+    font-size: 1.05rem;
+    color: var(--text-main);
+    outline: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.custom-select:hover {
+    background: #eaeaea;
+}
+
+.btn-search {
+    background: var(--color-black);
+    color: #fff;
+    padding: 16px 40px;
+    height: 58px;
+    /* Altura igual ao input */
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: 0.2s;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-search:hover {
+    background: var(--color-dark-grey);
+    transform: translateY(-2px);
+}
+
+
+/* --- SEÇÃO PLANTAS (SLIDER ESTILO FOTO 4) --- */
+.section-plants {
+    background: var(--bg-surface);
+    position: relative;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+}
+
+.section-header p {
+    color: var(--text-secondary);
+    font-size: 1.15rem;
+}
+
+/* Container do Slider */
+.plants-slider-container {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* O Slide Individual */
+.plan-slide {
+    display: none;
+    /* Escondido por padrão */
+    grid-template-columns: 1.2fr 1fr;
+    /* Imagem maior */
+    gap: 4rem;
+    align-items: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.plan-slide.active {
+    display: grid;
+}
+
+/* Mostra o ativo */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Lado da Imagem (Box Cinza) */
+.plan-img-box {
+    background: #E5E5E5;
+    /* Fundo cinza placeholder */
+    border-radius: var(--radius-box);
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    box-shadow: var(--shadow-md);
+}
+
+.plan-img-box img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    /* Faz o fundo branco da imagem mesclar se o fundo for cinza */
+}
+
+/* Lado do Texto (Caixa Escura) */
+.plan-content-box {
+    background: #111;
+    color: #fff;
+    padding: 3rem;
+    border-radius: var(--radius-box);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+}
+
+.plan-tag {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    opacity: 0.6;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.plan-title {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.plan-desc {
+    opacity: 0.8;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+}
+
+.btn-download {
+    display: inline-block;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 12px 24px;
+    border-radius: var(--radius-pill);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: 0.3s;
+    width: 100%;
+    text-align: center;
+}
+
+.btn-download:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* Setas de Navegação do Slider */
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none;
+    /* Permite clicar através do container */
+    z-index: 10;
+}
+
+.nav-arrow {
+    pointer-events: auto;
+    /* Reativa o clique nas setas */
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    font-size: 1.2rem;
+    transition: 0.2s;
+    color: #000;
+}
+
+/* Posiciona as setas um pouco fora do conteúdo */
+.nav-arrow.prev {
+    transform: translateX(-50%);
+}
+
+.nav-arrow.next {
+    transform: translateX(50%);
+}
+
+.nav-arrow:hover {
+    background: #000;
+    color: #fff;
+}
+
+
+/* --- SEÇÃO NOVO LAR (IMAGEM 6) --- */
+.section-about {
+    background: var(--bg-body);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+.about-img {
+    position: relative;
+}
+
+.about-img img {
+    border-radius: var(--radius-box);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.about-text h2 {
+    font-size: 3rem;
+    letter-spacing: -1.5px;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    color: #000;
+}
+
+.about-text p {
+    color: var(--text-secondary);
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+}
+
+
+/* --- OPORTUNIDADES (4 CARDS) --- */
+.section-highlights {
+    background: var(--bg-surface);
+}
+
+.grid-cards {
+    display: grid;
+    /* Grid responsivo: tenta colocar 4 colunas se couber, senão quebra */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: #fff;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid transparent;
+    box-shadow: var(--shadow-sm);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.card-img {
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.card:hover .card-img img {
+    transform: scale(1.05);
+}
+
+.badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    font-size: 0.75rem;
+    font-weight: 700;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-loc {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.specs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.specs span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: #F5F5F7;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.card-action {
+    margin-top: auto;
+    border-top: 1px solid #F0F0F0;
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+
+.btn-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #000;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 2px;
+    transition: 0.2s;
+}
+
+.btn-text:hover {
+    border-color: #000;
+}
+
+/* --- CTA BANNER --- */
+.cta-banner {
+    background: #000;
+    /* Preto Apple */
+    padding: 5rem 0;
+    text-align: center;
+    color: #fff;
+}
+
+.cta-banner h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.btn-cta-white {
+    background: #fff;
+    color: #000;
+    padding: 14px 36px;
+    border-radius: var(--radius-pill);
+    font-weight: 700;
+    font-size: 1rem;
+    display: inline-block;
+    transition: 0.2s;
+}
+
+.btn-cta-white:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* --- FOOTER --- */
+footer {
+    background: #F5F5F7;
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 3rem 0;
+    font-size: 0.9rem;
+    border-top: 1px solid #E5E5E5;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media(max-width: 900px) {
+    .plan-slide {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .plan-img-box {
+        height: 300px;
+    }
+
+    .slider-nav {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .nav-arrow.prev {
+        transform: none;
+    }
+
+    .nav-arrow.next {
+        transform: none;
+    }
+}
+
+@media(max-width: 768px) {
+    .search-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .search-card h1 {
+        font-size: 2.2rem;
+    }
+
+    .search-form {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .btn-search {
+        width: 100%;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+    }
+
+    .about-img {
+        order: -1;
+    }
+
+    .about-text h2 {
+        font-size: 2.2rem;
+    }
+
+    header .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .grid-cards {
+        grid-template-columns: 1fr;
+    }
+}
