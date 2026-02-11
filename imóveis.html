@@ -4,167 +4,272 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Imóveis | Riva & Direcional</title>
-    
+
+    <meta name="description" content="Catálogo completo de imóveis. Filtre por cidade e veja detalhes com atendimento via WhatsApp.">
+    <meta name="theme-color" content="#0B0B0D">
+
     <link rel="stylesheet" href="style.css">
-    
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
-        /* --- ESTILOS ESPECÍFICOS DESTA PÁGINA (FILTROS E MODAL) --- */
-        
-        /* Ajuste do topo para não ficar atrás do header */
+        /* =========================================================
+           ESTILOS ESPECÍFICOS DESTA PÁGINA (FILTROS E MODAL)
+           Mantém suas classes/estrutura, só melhora estética/UX
+           ========================================================= */
+
         .catalog-header {
-            padding-top: 120px;
-            padding-bottom: 40px;
+            padding-top: 118px;
+            padding-bottom: 34px;
             text-align: center;
         }
-        .catalog-header h1 { font-size: 3rem; letter-spacing: -1.5px; margin-bottom: 1rem; }
-        
+
+        .catalog-header h1 {
+            font-size: clamp(2rem, 4vw, 3.05rem);
+            letter-spacing: -1.6px;
+            margin-bottom: 0.75rem;
+            line-height: 1.05;
+        }
+
+        .catalog-header p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.08rem;
+        }
+
         /* Filtros (Pills) */
         .filters-container {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 10px;
-            margin-bottom: 3rem;
-        }
-        
-        .filter-btn {
-            background: #F5F5F7;
-            border: 1px solid #E5E5E5;
-            padding: 10px 24px;
-            border-radius: 999px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            color: #666;
-        }
-        
-        .filter-btn:hover { background: #E0E0E0; color: #000; }
-        
-        /* Estado Ativo do Filtro */
-        .filter-btn.active {
-            background: #000;
-            color: #fff;
-            border-color: #000;
+            margin-bottom: 2.8rem;
         }
 
-        /* Grid de Imóveis (Reaproveita classes do style.css mas reforça aqui) */
+        .filter-btn {
+            background: rgba(246,247,249,0.9);
+            border: 1px solid rgba(0,0,0,0.10);
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+            color: var(--text-secondary);
+        }
+
+        .filter-btn:hover {
+            background: rgba(0,0,0,0.04);
+            transform: translateY(-1px);
+            border-color: rgba(0,0,0,0.14);
+            color: var(--text-main);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--color-black), #1C1C22);
+            color: #fff;
+            border-color: rgba(0,0,0,0.22);
+            box-shadow: 0 14px 38px rgba(0,0,0,0.18);
+        }
+
+        /* Grid */
         .catalog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
+            gap: 1.85rem;
             padding-bottom: 4rem;
         }
 
-        /* --- MODAL (A Janela de Detalhes) --- */
+        /* --- MODAL --- */
         .modal-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
+            inset: 0;
+            background: rgba(0, 0, 0, 0.58);
+            backdrop-filter: blur(10px);
             z-index: 2000;
-            display: none; /* Escondido por padrão */
+            display: none;
             align-items: center;
             justify-content: center;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.25s ease;
+            padding: 18px;
         }
         .modal-overlay.open { display: flex; opacity: 1; }
 
         .modal-card {
-            background: #fff;
-            width: 90%;
-            max-width: 900px;
+            background: rgba(255,255,255,0.96);
+            width: 100%;
+            max-width: 920px;
             max-height: 90vh;
-            border-radius: 24px;
-            overflow-y: auto;
+            border-radius: 26px;
+            overflow: hidden;
             position: relative;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-            animation: slideUp 0.4s ease;
+            box-shadow: 0 30px 90px rgba(0,0,0,0.38);
+            animation: slideUp 0.35s ease;
+            border: 1px solid rgba(0,0,0,0.08);
         }
 
         @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
+            from { transform: translateY(26px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
 
         .modal-close {
             position: absolute;
-            top: 20px; right: 20px;
-            background: rgba(255,255,255,0.8);
-            border-radius: 50%;
-            width: 40px; height: 40px;
+            top: 16px; right: 16px;
+            background: rgba(255,255,255,0.92);
+            border-radius: 999px;
+            padding: 10px 12px;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             z-index: 10;
-            border: none;
-            transition: 0.2s;
+            border: 1px solid rgba(0,0,0,0.10);
+            transition: transform var(--transition-fast), background var(--transition-fast);
         }
-        .modal-close:hover { background: #fff; transform: scale(1.1); }
+        .modal-close:hover { background: #fff; transform: translateY(-1px); }
 
         .modal-img-container {
             width: 100%;
-            height: 400px;
+            height: 410px;
             background: #eee;
+            position: relative;
         }
+
+        .modal-img-container::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.38), transparent 55%);
+            pointer-events: none;
+        }
+
         .modal-img-container img { width: 100%; height: 100%; object-fit: cover; }
 
-        .modal-content { padding: 3rem; }
-        .modal-tag { 
-            background: #000; color: #fff; padding: 4px 12px; 
-            border-radius: 999px; font-size: 0.8rem; font-weight: 700; 
-            text-transform: uppercase; margin-bottom: 1rem; display: inline-block;
+        .modal-content { padding: 2.6rem; }
+
+        .modal-tag {
+            background: linear-gradient(135deg, var(--color-black), #1C1C22);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            letter-spacing: 0.6px;
         }
-        .modal-title { font-size: 2.5rem; margin-bottom: 0.5rem; line-height: 1.1; }
-        .modal-loc { font-size: 1.1rem; color: #666; margin-bottom: 2rem; display: flex; align-items: center; gap: 6px; }
+
+        .modal-tag::before{
+            content:"";
+            width: 10px; height: 10px;
+            border-radius: 99px;
+            background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+            display:inline-block;
+        }
+
+        .modal-title { font-size: clamp(1.6rem, 3vw, 2.55rem); margin-bottom: 0.35rem; line-height: 1.08; letter-spacing: -1px; }
+
+        .modal-loc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+        }
 
         .modal-specs {
-            display: flex; gap: 20px; margin-bottom: 2rem;
-            border-bottom: 1px solid #eee; padding-bottom: 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-bottom: 1.8rem;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            padding-bottom: 1.8rem;
         }
-        .spec-box { text-align: center; background: #F5F5F7; padding: 15px 25px; border-radius: 12px; }
-        .spec-box strong { display: block; font-size: 1.2rem; }
-        .spec-box span { font-size: 0.85rem; color: #666; }
 
-        .modal-desc { line-height: 1.8; color: #444; margin-bottom: 2rem; }
+        .spec-box {
+            text-align: center;
+            background: rgba(246,247,249,0.9);
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .spec-box strong { display: block; font-size: 1.2rem; font-weight: 900; letter-spacing: -0.5px; }
+        .spec-box span { font-size: 0.86rem; color: var(--text-secondary); font-weight: 700; }
+
+        .modal-desc h3 { margin-bottom: 10px; letter-spacing: -0.4px; }
+        .modal-desc p { line-height: 1.75; color: #3A3A3F; }
 
         .modal-footer {
-            display: flex; justify-content: space-between; align-items: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
             margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid #eee;
+            padding-top: 1.8rem;
+            border-top: 1px solid rgba(0,0,0,0.08);
         }
-        .modal-price { font-size: 1.8rem; font-weight: 800; }
+
+        .modal-price { font-size: 1.85rem; font-weight: 950; letter-spacing: -0.8px; }
+
         .btn-whatsapp-modal {
-            background: #25D366; color: #fff;
-            padding: 16px 32px; border-radius: 999px;
-            font-weight: 700; font-size: 1rem;
-            display: flex; align-items: center; gap: 10px;
-            transition: 0.2s;
+            background: linear-gradient(135deg, var(--color-whatsapp), #18B85A);
+            color: #fff;
+            padding: 14px 22px;
+            border-radius: 999px;
+            font-weight: 900;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+            box-shadow: 0 18px 50px rgba(37, 211, 102, 0.28);
+            border: 1px solid rgba(0,0,0,0.06);
+            white-space: nowrap;
         }
-        .btn-whatsapp-modal:hover { background: #1ebc57; transform: scale(1.05); }
+
+        .btn-whatsapp-modal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 22px 60px rgba(37, 211, 102, 0.33);
+        }
 
         /* Responsividade */
         @media(max-width: 768px) {
-            .catalog-header h1 { font-size: 2rem; }
-            .modal-img-container { height: 250px; }
+            .modal-img-container { height: 260px; }
             .modal-content { padding: 1.5rem; }
-            .modal-footer { flex-direction: column; gap: 15px; align-items: stretch; text-align: center; }
-            .modal-specs { overflow-x: auto; padding-bottom: 10px; }
+            .modal-footer { flex-direction: column; align-items: stretch; text-align: center; }
+            .modal-specs { grid-template-columns: 1fr; }
+            .btn-whatsapp-modal { width: 100%; }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .modal-card {
+                background: rgba(19,19,26,0.86);
+                border-color: rgba(255,255,255,0.10);
+            }
+            .modal-desc p { color: rgba(255,255,255,0.80); }
+            .modal-loc { color: rgba(255,255,255,0.80); }
+            .spec-box { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.10); }
+            .modal-footer, .modal-specs { border-color: rgba(255,255,255,0.10); }
+            .modal-close { background: rgba(19,19,26,0.86); border-color: rgba(255,255,255,0.14); color:#fff; }
         }
     </style>
 </head>
 <body>
 
-    <header id="header" class="scrolled"> <div class="container">
-            <div class="logo" style="color: #000;">SeuNomeBroker.</div>
-            <nav>
-                <a href="index.html" style="color: #000;">Início</a>
-                <a href="index.html#plantas" style="color: #000;">Plantas</a>
-                <a href="#" class="btn-nav" style="background: #000; color: #fff !important;">WhatsApp</a>
+    <header id="header">
+        <div class="container">
+            <div class="logo">SeuNomeBroker.</div>
+            <nav aria-label="Navegação do catálogo">
+                <a href="index.html">Início</a>
+                <a href="index.html#plantas">Plantas</a>
+                <a href="#" class="btn-nav" onclick="contactWhatsApp(); return false;">WhatsApp</a>
             </nav>
         </div>
     </header>
@@ -172,8 +277,8 @@
     <div class="container">
         <section class="catalog-header">
             <h1>Nossos Empreendimentos</h1>
-            <p style="color: #86868B; margin-bottom: 2rem;">Selecione uma cidade para filtrar as opções.</p>
-            
+            <p>Selecione uma cidade para filtrar as opções.</p>
+
             <div class="filters-container" id="filters">
                 <button class="filter-btn active" onclick="filterItems('all', this)">Todos</button>
                 <button class="filter-btn" onclick="filterItems('Taguatinga', this)">Taguatinga</button>
@@ -187,23 +292,22 @@
             </div>
         </section>
 
-        <div class="catalog-grid" id="grid">
-            </div>
+        <div class="catalog-grid" id="grid"></div>
     </div>
 
-    <div class="modal-overlay" id="modal">
-        <div class="modal-card">
-            <button class="modal-close" onclick="closeModal()">×</button>
-            
+    <div class="modal-overlay" id="modal" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-label="Detalhes do imóvel">
+            <button class="modal-close" onclick="closeModal()" aria-label="Fechar">×</button>
+
             <div class="modal-img-container">
                 <img id="m-img" src="" alt="Imagem do Imóvel">
             </div>
-            
+
             <div class="modal-content">
                 <span class="modal-tag" id="m-status">LANÇAMENTO</span>
                 <h2 class="modal-title" id="m-title">Título do Imóvel</h2>
                 <div class="modal-loc"><i class="ph ph-map-pin"></i> <span id="m-loc">Localização</span></div>
-                
+
                 <div class="modal-specs">
                     <div class="spec-box">
                         <strong id="m-beds">2</strong>
@@ -220,13 +324,13 @@
                 </div>
 
                 <div class="modal-desc">
-                    <h3 style="margin-bottom: 10px;">Sobre o Imóvel</h3>
+                    <h3>Sobre o Imóvel</h3>
                     <p id="m-desc">Descrição completa aqui...</p>
                 </div>
 
                 <div class="modal-footer">
                     <div>
-                        <span style="display:block; font-size:0.9rem; color:#666;">A partir de</span>
+                        <span style="display:block; font-size:0.92rem; color: var(--text-secondary); font-weight:800;">A partir de</span>
                         <span class="modal-price" id="m-price">R$ 000.000</span>
                     </div>
                     <button class="btn-whatsapp-modal" onclick="contactWhatsApp()">
@@ -327,22 +431,23 @@
 
         function renderCards(filter = 'all') {
             grid.innerHTML = '';
-            
-            const filteredProps = filter === 'all' 
-                ? properties 
+
+            const filteredProps = filter === 'all'
+                ? properties
                 : properties.filter(p => p.location.includes(filter));
 
-            if(filteredProps.length === 0) {
-                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888; padding: 50px;">Nenhum imóvel encontrado nesta região.</p>';
+            if (filteredProps.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-secondary); padding: 50px; font-weight:800;">Nenhum imóvel encontrado nesta região.</p>';
                 return;
             }
 
             filteredProps.forEach(prop => {
                 const card = document.createElement('div');
-                card.className = 'card'; // Classe do style.css
-                // Adiciona o evento de clique para abrir o modal
-                card.onclick = () => openModal(prop); 
+                card.className = 'card';
+                card.onclick = () => openModal(prop);
                 card.style.cursor = 'pointer';
+                card.setAttribute("role", "button");
+                card.setAttribute("aria-label", `Abrir detalhes de ${prop.title}`);
 
                 card.innerHTML = `
                     <div class="card-img">
@@ -359,7 +464,7 @@
                         </div>
                         <div class="card-action">
                             <span class="price">${prop.price}</span>
-                            <button class="btn-text">Ver Detalhes</button>
+                            <button class="btn-text" type="button">Ver Detalhes</button>
                         </div>
                     </div>
                 `;
@@ -369,26 +474,29 @@
 
         // --- FILTROS ---
         function filterItems(location, btn) {
-            // Remove active de todos
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            // Adiciona no clicado
             btn.classList.add('active');
-            // Filtra
             renderCards(location);
         }
+
+        // --- HEADER SCROLL EFFECT (mesma sensação do index) ---
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (!header) return;
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
 
         // --- LÓGICA DO URL (Se vier da Home com filtro) ---
         window.onload = function() {
             const params = new URLSearchParams(window.location.search);
             const localFilter = params.get('local');
-            
-            if(localFilter) {
-                // Tenta achar o botão correspondente para ativar visualmente
+
+            if (localFilter) {
                 const btns = document.querySelectorAll('.filter-btn');
                 btns.forEach(b => {
-                    if(b.innerText.includes(localFilter)) {
+                    if (b.innerText.includes(localFilter)) {
                         b.classList.add('active');
-                        // Remove do "Todos"
                         btns[0].classList.remove('active');
                     }
                 });
@@ -404,8 +512,7 @@
 
         function openModal(prop) {
             currentProp = prop;
-            
-            // Preenche os dados
+
             document.getElementById('m-img').src = prop.img;
             document.getElementById('m-status').innerText = prop.status;
             document.getElementById('m-title').innerText = prop.title;
@@ -416,29 +523,34 @@
             document.getElementById('m-desc').innerText = prop.desc;
             document.getElementById('m-price').innerText = prop.price;
 
-            // Abre
             modal.classList.add('open');
-            document.body.style.overflow = 'hidden'; // Trava scroll do fundo
+            modal.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             modal.classList.remove('open');
+            modal.setAttribute("aria-hidden", "true");
             document.body.style.overflow = 'auto';
         }
 
-        // Fechar ao clicar fora
         modal.addEventListener('click', (e) => {
-            if(e.target === modal) closeModal();
+            if (e.target === modal) closeModal();
+        });
+
+        // Fecha com ESC
+        window.addEventListener('keydown', (e) => {
+            if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
         });
 
         // WhatsApp do Modal
         function contactWhatsApp() {
-            if(!currentProp) return;
             const phone = "5561999999999"; // SEU NÚMERO
-            const text = `Olá! Vi o imóvel *${currentProp.title}* (${currentProp.location}) no site e gostaria de uma simulação.`;
+            const text = currentProp
+                ? `Olá! Vi o imóvel *${currentProp.title}* (${currentProp.location}) no site e gostaria de uma simulação.`
+                : "Olá! Vim pelo site e gostaria de mais informações sobre os imóveis.";
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
         }
-
     </script>
 </body>
 </html>

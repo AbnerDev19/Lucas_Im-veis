@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imóveis Riva & Direcional | Especialista</title>
+
+    <meta name="description" content="Especialista Riva e Direcional no DF e Entorno. Encontre imóveis, plantas e oportunidades com atendimento humanizado via WhatsApp.">
+    <meta name="theme-color" content="#0B0B0D">
+
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
@@ -12,221 +16,223 @@
     <header id="header">
         <div class="container">
             <div class="logo">SeuNomeBroker.</div>
-            <nav>
+            <nav aria-label="Navegação principal">
                 <a href="#">Início</a>
                 <a href="#plantas">Plantas</a>
                 <a href="#sobre">Sobre</a>
                 <a href="imóveis.html">Catálogo Completo</a>
-                <a href="" onclick="openWhatsApp()" class="btn-nav">WhatsApp</a>
+                <a href="" onclick="openWhatsApp(); return false;" class="btn-nav">WhatsApp</a>
             </nav>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000');"></div>
-        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1600596542815-2a4fa3041442?q=80&w=2000');"></div>
-        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2000');"></div>
+    <main>
+        <section class="hero" aria-label="Destaques do site">
+            <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1600596542815-2a4fa3041442?q=80&w=2000');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2000');"></div>
 
-        <div class="hero-overlay"></div>
+            <div class="hero-overlay"></div>
 
-        <div class="search-wrapper">
-            <div class="search-card">
-                <h1>O imóvel dos seus sonhos está aqui.</h1>
-                <p>Especialista Riva e Direcional no DF e Entorno.</p>
+            <div class="search-wrapper">
+                <div class="search-card">
+                    <h1>O imóvel dos seus sonhos está aqui.</h1>
+                    <p>Especialista Riva e Direcional no DF e Entorno.</p>
 
-                <div class="search-form">
-                    <div class="input-group">
-                        <label>Localização</label>
-                        <select id="location" class="custom-select">
-                            <option value="">Todas as Cidades</option>
-                            <option value="Taguatinga">Taguatinga</option>
-                            <option value="Águas Claras">Águas Claras</option>
-                            <option value="Ceilândia">Ceilândia</option>
-                            <option value="Samambaia">Samambaia</option>
-                            <option value="Noroeste">Noroeste</option>
-                        </select>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label>Interesse</label>
-                        <select id="type" class="custom-select">
-                            <option value="Comprar">Quero Comprar</option>
-                            <option value="Na Planta">Investir na Planta</option>
-                        </select>
-                    </div>
+                    <div class="search-form">
+                        <div class="input-group">
+                            <label for="location">Localização</label>
+                            <select id="location" class="custom-select">
+                                <option value="">Todas as Cidades</option>
+                                <option value="Taguatinga">Taguatinga</option>
+                                <option value="Águas Claras">Águas Claras</option>
+                                <option value="Ceilândia">Ceilândia</option>
+                                <option value="Samambaia">Samambaia</option>
+                                <option value="Noroeste">Noroeste</option>
+                            </select>
+                        </div>
 
-                    <button class="btn-search" onclick="goToSearch()">
-                        Buscar Imóveis
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
+                        <div class="input-group">
+                            <label for="type">Interesse</label>
+                            <select id="type" class="custom-select">
+                                <option value="Comprar">Quero Comprar</option>
+                                <option value="Na Planta">Investir na Planta</option>
+                            </select>
+                        </div>
 
-    <section id="plantas" class="section-plants">
-        <div class="container">
-            <div class="section-header">
-                <h2>Plantas Exclusivas</h2>
-                <p>Navegue pelas opções e encontre a distribuição perfeita.</p>
-            </div>
-
-            <div class="plants-slider-container">
-                <div class="slider-nav">
-                    <div class="nav-arrow prev" onclick="changePlan(-1)"><i class="ph ph-caret-left"></i></div>
-                    <div class="nav-arrow next" onclick="changePlan(1)"><i class="ph ph-caret-right"></i></div>
-                </div>
-
-                <div class="plan-slide active">
-                    <div class="plan-img-box">
-                        <img src="https://placehold.co/800x600/png?text=Planta+2+Quartos" alt="Planta 2Q">
-                    </div>
-                    <div class="plan-content-box">
-                        <span class="plan-tag">LANÇAMENTO</span>
-                        <h3 class="plan-title">2 Quartos com Suíte</h3>
-                        <p class="plan-desc">Integração total entre sala e cozinha americana. Varanda gourmet estendida e acabamento premium em porcelanato. Ideal para casais jovens.</p>
-                        <a href="imoveis.html" class="btn-download">Ver Detalhes da Unidade</a>
-                    </div>
-                </div>
-
-                <div class="plan-slide">
-                    <div class="plan-img-box">
-                        <img src="https://placehold.co/800x600/png?text=Planta+3+Quartos" alt="Planta 3Q">
-                    </div>
-                    <div class="plan-content-box">
-                        <span class="plan-tag">FAMÍLIA</span>
-                        <h3 class="plan-title">3 Quartos Spacious</h3>
-                        <p class="plan-desc">Amplo espaço para sua família. Planta inteligente com lavabo, suíte master com closet e isolamento acústico reforçado.</p>
-                        <a href="imoveis.html" class="btn-download">Ver Detalhes da Unidade</a>
-                    </div>
-                </div>
-
-                <div class="plan-slide">
-                    <div class="plan-img-box">
-                        <img src="https://placehold.co/800x600/png?text=Planta+Garden" alt="Planta Garden">
-                    </div>
-                    <div class="plan-content-box">
-                        <span class="plan-tag">EXCLUSIVO</span>
-                        <h3 class="plan-title">Garden Térreo</h3>
-                        <p class="plan-desc">A segurança de um apartamento com a liberdade de uma casa. Área externa privativa de 40m², perfeita para pets e lazer.</p>
-                        <a href="imoveis.html" class="btn-download">Ver Detalhes da Unidade</a>
+                        <button class="btn-search" onclick="goToSearch()">
+                            Buscar Imóveis
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="sobre" class="section-about">
-        <div class="container about-grid">
-            <div class="about-img">
-                <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1000" alt="Prédio Moderno">
-            </div>
-            <div class="about-text">
-                <h2>Seu Novo Lar Começa Aqui</h2>
-                <p>Nosso compromisso vai além de apresentar propriedades. Estamos aqui para entender suas necessidades e transformar o processo de compra em uma experiência segura, transparente e humanizada.</p>
-                <p>Conte conosco para encontrar não apenas um imóvel, mas um lugar para construir novas histórias e realizar sonhos com a solidez da Riva e Direcional.</p>
-                <a href="#" onclick="openWhatsApp()" class="btn-search" style="display:inline-block; margin-top:10px;">Falar com Especialista</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-highlights">
-        <div class="container">
-            <div class="section-header">
-                <h2>Oportunidades de Hoje</h2>
-                <p>Imóveis em destaque selecionados para você.</p>
-            </div>
-            
-            <div class="grid-cards">
-                <div class="card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1600596542815-2a4fa3041442?q=80&w=600" alt="Imóvel">
-                        <span class="badge">Lançamento</span>
-                    </div>
-                    <div class="card-content">
-                        <span class="card-loc"><i class="ph ph-map-pin"></i> Taguatinga, DF</span>
-                        <h3 class="card-title">Reserva Taguatinga</h3>
-                        <div class="specs">
-                            <span>2 Qts</span>
-                            <span>1 Vaga</span>
-                            <span>52m²</span>
-                        </div>
-                        <div class="card-action">
-                            <span class="price">R$ 245.000</span>
-                            <a href="imoveis.html" class="btn-text">Ver Detalhes</a>
-                        </div>
-                    </div>
+        <section id="plantas" class="section-plants">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Plantas Exclusivas</h2>
+                    <p>Navegue pelas opções e encontre a distribuição perfeita.</p>
                 </div>
 
-                <div class="card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=600" alt="Imóvel">
-                        <span class="badge">Pronto</span>
+                <div class="plants-slider-container">
+                    <div class="slider-nav">
+                        <div class="nav-arrow prev" onclick="changePlan(-1)" role="button" aria-label="Planta anterior"><i class="ph ph-caret-left"></i></div>
+                        <div class="nav-arrow next" onclick="changePlan(1)" role="button" aria-label="Próxima planta"><i class="ph ph-caret-right"></i></div>
                     </div>
-                    <div class="card-content">
-                        <span class="card-loc"><i class="ph ph-map-pin"></i> Ceilândia, DF</span>
-                        <h3 class="card-title">Top Life Club</h3>
-                        <div class="specs">
-                            <span>3 Qts</span>
-                            <span>Lazer</span>
-                            <span>65m²</span>
-                        </div>
-                        <div class="card-action">
-                            <span class="price">R$ 290.000</span>
-                            <a href="imoveis.html" class="btn-text">Ver Detalhes</a>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=600" alt="Imóvel">
-                        <span class="badge">Na Planta</span>
-                    </div>
-                    <div class="card-content">
-                        <span class="card-loc"><i class="ph ph-map-pin"></i> Águas Claras, DF</span>
-                        <h3 class="card-title">Vila das Águas</h3>
-                        <div class="specs">
-                            <span>1 Qt</span>
-                            <span>Metrô</span>
-                            <span>35m²</span>
+                    <div class="plan-slide active">
+                        <div class="plan-img-box">
+                            <img src="https://placehold.co/800x600/png?text=Planta+2+Quartos" alt="Planta 2 Quartos">
                         </div>
-                        <div class="card-action">
-                            <span class="price">R$ 199.000</span>
-                            <a href="imoveis.html" class="btn-text">Ver Detalhes</a>
+                        <div class="plan-content-box">
+                            <span class="plan-tag">LANÇAMENTO</span>
+                            <h3 class="plan-title">2 Quartos com Suíte</h3>
+                            <p class="plan-desc">Integração total entre sala e cozinha americana. Varanda gourmet estendida e acabamento premium em porcelanato. Ideal para casais jovens.</p>
+                            <a href="imóveis.html" class="btn-download">Ver Detalhes da Unidade</a>
                         </div>
                     </div>
-                </div>
 
-                <div class="card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1574362848149-11496d93a7c7?q=80&w=600" alt="Imóvel">
-                        <span class="badge">Alto Padrão</span>
-                    </div>
-                    <div class="card-content">
-                        <span class="card-loc"><i class="ph ph-map-pin"></i> Noroeste, DF</span>
-                        <h3 class="card-title">Residencial Essence</h3>
-                        <div class="specs">
-                            <span>4 Qts</span>
-                            <span>3 Vagas</span>
-                            <span>140m²</span>
+                    <div class="plan-slide">
+                        <div class="plan-img-box">
+                            <img src="https://placehold.co/800x600/png?text=Planta+3+Quartos" alt="Planta 3 Quartos">
                         </div>
-                        <div class="card-action">
-                            <span class="price">R$ 1.850.000</span>
-                            <a href="imoveis.html" class="btn-text">Ver Detalhes</a>
+                        <div class="plan-content-box">
+                            <span class="plan-tag">FAMÍLIA</span>
+                            <h3 class="plan-title">3 Quartos Spacious</h3>
+                            <p class="plan-desc">Amplo espaço para sua família. Planta inteligente com lavabo, suíte master com closet e isolamento acústico reforçado.</p>
+                            <a href="imóveis.html" class="btn-download">Ver Detalhes da Unidade</a>
+                        </div>
+                    </div>
+
+                    <div class="plan-slide">
+                        <div class="plan-img-box">
+                            <img src="https://placehold.co/800x600/png?text=Planta+Garden" alt="Planta Garden">
+                        </div>
+                        <div class="plan-content-box">
+                            <span class="plan-tag">EXCLUSIVO</span>
+                            <h3 class="plan-title">Garden Térreo</h3>
+                            <p class="plan-desc">A segurança de um apartamento com a liberdade de uma casa. Área externa privativa de 40m², perfeita para pets e lazer.</p>
+                            <a href="imóveis.html" class="btn-download">Ver Detalhes da Unidade</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="cta-banner">
-        <div class="container">
-            <h2>Ficou interessado?</h2>
-            <p style="margin-bottom: 2rem; color: #ccc;">Baixe a tabela de preços atualizada e agende sua visita.</p>
-            <a href="#" onclick="openWhatsApp()" class="btn-cta-white">FALAR COM CORRETOR</a>
-        </div>
-    </section>
+        <section id="sobre" class="section-about">
+            <div class="container about-grid">
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1000" alt="Prédio Moderno">
+                </div>
+                <div class="about-text">
+                    <h2>Seu Novo Lar Começa Aqui</h2>
+                    <p>Nosso compromisso vai além de apresentar propriedades. Estamos aqui para entender suas necessidades e transformar o processo de compra em uma experiência segura, transparente e humanizada.</p>
+                    <p>Conte conosco para encontrar não apenas um imóvel, mas um lugar para construir novas histórias e realizar sonhos com a solidez da Riva e Direcional.</p>
+                    <a href="#" onclick="openWhatsApp(); return false;" class="btn-search" style="display:inline-block; margin-top:10px;">Falar com Especialista</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-highlights">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Oportunidades de Hoje</h2>
+                    <p>Imóveis em destaque selecionados para você.</p>
+                </div>
+
+                <div class="grid-cards">
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="https://images.unsplash.com/photo-1600596542815-2a4fa3041442?q=80&w=600" alt="Imóvel">
+                            <span class="badge">Lançamento</span>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-loc"><i class="ph ph-map-pin"></i> Taguatinga, DF</span>
+                            <h3 class="card-title">Reserva Taguatinga</h3>
+                            <div class="specs">
+                                <span>2 Qts</span>
+                                <span>1 Vaga</span>
+                                <span>52m²</span>
+                            </div>
+                            <div class="card-action">
+                                <span class="price">R$ 245.000</span>
+                                <a href="imóveis.html" class="btn-text">Ver Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=600" alt="Imóvel">
+                            <span class="badge">Pronto</span>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-loc"><i class="ph ph-map-pin"></i> Ceilândia, DF</span>
+                            <h3 class="card-title">Top Life Club</h3>
+                            <div class="specs">
+                                <span>3 Qts</span>
+                                <span>Lazer</span>
+                                <span>65m²</span>
+                            </div>
+                            <div class="card-action">
+                                <span class="price">R$ 290.000</span>
+                                <a href="imóveis.html" class="btn-text">Ver Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=600" alt="Imóvel">
+                            <span class="badge">Na Planta</span>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-loc"><i class="ph ph-map-pin"></i> Águas Claras, DF</span>
+                            <h3 class="card-title">Vila das Águas</h3>
+                            <div class="specs">
+                                <span>1 Qt</span>
+                                <span>Metrô</span>
+                                <span>35m²</span>
+                            </div>
+                            <div class="card-action">
+                                <span class="price">R$ 199.000</span>
+                                <a href="imóveis.html" class="btn-text">Ver Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="https://images.unsplash.com/photo-1574362848149-11496d93a7c7?q=80&w=600" alt="Imóvel">
+                            <span class="badge">Alto Padrão</span>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-loc"><i class="ph ph-map-pin"></i> Noroeste, DF</span>
+                            <h3 class="card-title">Residencial Essence</h3>
+                            <div class="specs">
+                                <span>4 Qts</span>
+                                <span>3 Vagas</span>
+                                <span>140m²</span>
+                            </div>
+                            <div class="card-action">
+                                <span class="price">R$ 1.850.000</span>
+                                <a href="imóveis.html" class="btn-text">Ver Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-banner">
+            <div class="container">
+                <h2>Ficou interessado?</h2>
+                <p style="margin-bottom: 2rem; color: rgba(255,255,255,0.78);">Baixe a tabela de preços atualizada e agende sua visita.</p>
+                <a href="#" onclick="openWhatsApp(); return false;" class="btn-cta-white">FALAR COM CORRETOR</a>
+            </div>
+        </section>
+    </main>
 
     <footer>
         <div class="container">
